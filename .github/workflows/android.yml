@@ -22,9 +22,9 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Update Username from Secrets
+    - name: Update API Key from Secrets
       env:
         API_KEY: ${{ secrets.API_KEY }}
-      run: echo API_KEY="$API_KEY" > ./local.properties
+      run: echo API_KEY=\"$API_KEY\" > ./local.properties
     - name: Run Android Check
       run: ./gradlew check
