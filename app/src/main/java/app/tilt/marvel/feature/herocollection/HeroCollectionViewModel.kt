@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -43,7 +42,7 @@ class HeroCollectionViewModel @Inject constructor(
     }
 
     fun tryLoadingMoreHeroes() {
-        Timber.tag("TEST").d("Try loading more heroes")
+        Timber.d("Try loading more heroes")
         viewModelScope.launch {
             heroListLoading.value = true
             heroRepository.loadMoreHeroes(searchValue.value.takeIf { it.length >= 2 })

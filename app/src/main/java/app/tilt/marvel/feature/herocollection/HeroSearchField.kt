@@ -29,10 +29,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.tilt.marvel.R
-import timber.log.Timber
 
 @Composable
-fun HeroSearchField(searchValue: String, padding: Dp, onSearch: (String) -> Unit, modifier: Modifier = Modifier) {
+fun HeroSearchField(
+    searchValue: String,
+    padding: Dp,
+    onSearch: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val focusManager = LocalFocusManager.current
     val source = remember { MutableInteractionSource() }
     val focused by source.collectIsFocusedAsState()
@@ -40,13 +44,6 @@ fun HeroSearchField(searchValue: String, padding: Dp, onSearch: (String) -> Unit
         targetValue = if (focused) 0.dp else padding,
         animationSpec = tween()
     )
-//        val isVisible = WindowInsets.ime.getBottom(LocalDensity.current) > 0
-//        LaunchedEffect(isVisible) {
-//            Timber.tag("TEST").d("Keyboard visible $isVisible")
-//            if (!isVisible) {
-//                focusManager.clearFocus()
-//            }
-//        }
     OutlinedTextField(
         value = searchValue, onValueChange = onSearch, modifier = modifier
             .fillMaxWidth()
@@ -55,7 +52,6 @@ fun HeroSearchField(searchValue: String, padding: Dp, onSearch: (String) -> Unit
         interactionSource = source,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = {
-            Timber.tag("TEST").d("on search")
             focusManager.clearFocus()
         }),
         trailingIcon = {

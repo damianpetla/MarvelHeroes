@@ -5,6 +5,10 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def apiKey = properties.getProperty('API_KEY')
+
 android {
     compileSdk 33
 
@@ -25,6 +29,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField 'String', "API_KEY", apiKey
         }
     }
     compileOptions {

@@ -1,7 +1,6 @@
 package app.tilt.marvel.data.remote
 
 import app.tilt.marvel.data.remote.dto.Character
-import app.tilt.marvel.domain.Comic
 import app.tilt.marvel.domain.Hero
 
 fun List<Character>.toDomain(): List<Hero> = map { character ->
